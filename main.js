@@ -1,7 +1,7 @@
 function renderTodos(todos){
 	nodes.ul.innerHTML = "";
 	todos.forEach(todo => {
-		const li = `<li data-id="${todo.id}">${todo.id}. ${todo.title}  <span> - Completed: <input type="checkbox" class="tickBox"> Remove: <button class="btnDelete">X</button></span></li>`;
+		const li = `<li data-id="${todo.id}">${todo.id}. ${todo.title} <br><div class="tickBox">Completed:<input type="checkbox"></div> Remove:  <button class="btnDelete"> X</button></li>`;
 		nodes.ul.innerHTML += li;
 	});
 }
@@ -14,7 +14,7 @@ function addTodo(todos) {
 	const newTodo = {
 		id:id,
 		title: nodes.input.value,
-		complete:false
+		completed:false
 	}
 
 	todos = [...todos, newTodo];
@@ -24,16 +24,14 @@ function addTodo(todos) {
 	renderTodos(todos)
 }
 
-function deleteTodo(todos, id) {
+function deleteTodo(todos, todoId) {
 	// change state
 	//TODO: find bug:
-	let idx = todos.findIndex(todo=>{
-		console.dir(todo);
-		todo.id===id;
-		return todo.id;
-	});
-
-	console.log(`id: ${id};idx:${idx}`);
+	let condition = todo => todo.id == todoId;
+	idx = todos.findIndex(condition);
+		// console.dir(todo);
+		
+	console.log(`todoId: ${todoId};idx:${idx}`);
 
 	if(idx!== -1){
 		todos.splice(idx,1);
@@ -45,12 +43,13 @@ function deleteTodo(todos, id) {
 
 }
 
-function refreshTodo(todos, id){
-	let idx = todos.findIndex(todo=>{
-		console.dir(todo);
-		todo.id===id;
-		return todo.id;
-	});
+function refreshTodo(todos, todoId){
+	let condition = todo => todo.id == todoId;
+	idx = todos.findIndex(condition);
+		// console.dir(todo);
+		
+	console.log(`todoId: ${todoId};idx:${idx}`);
+
 	if(idx!== -1){
 		console.log(idx, todos[idx]);
 		todos[idx].completed = !todos[idx].completed;
@@ -90,16 +89,18 @@ nodes.btnAdd.addEventListener('click', function(e){
 nodes.ul.addEventListener('click', function (e) {
 	// if btnDelete is clicked:
 	if(e.target.className=='btnDelete'){
-		let id = e.target.parentElement.parentElement.dataset.id;
-		deleteTodo(todos, id)
-
+		let todoId = e.target.parentElement.dataset.id;
+		
+		deleteTodo(todos, todoId)
+		
 		// render state
 		renderTodos(todos)
 	}
-	else if(e.target.className=='tickBox'){
-		let id = e.target.parentElement.parentElement.dataset.id;
+	else if(e.target.parentElement.className=='tickBox'){
+		let todoId = e.target.parentElement.parentElement.dataset.id;
+		console.log(todoId);
 		// let getBoxStatus = e.target.checked;
-		refreshTodo(todos, id);
+		refreshTodo(todos, todoId);
 
 		// render state
 		// renderTodos(todos)
