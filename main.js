@@ -3,12 +3,13 @@ function renderTodos(todos){
 	todos.forEach(todo => {
 		const li = `<li data-id="${todo.id}">${todo.id}. ${todo.title} <br><div class="tickBox">Completed:<input type="checkbox"></div> Remove:  <button class="btnDelete"> X</button></li>`;
 		nodes.ul.innerHTML += li;
+		totalNumberTodos();
 	});
 }
 
 function addTodo(todos) {
 	// get last todo id:
-	let id = todos[todos.length-1].id;
+	let id = (todos[todos.length-1].id*1+1);
 
 	// add to todos
 	const newTodo = {
@@ -18,10 +19,8 @@ function addTodo(todos) {
 	}
 
 	todos = [...todos, newTodo];
-	console.dir(todos);
-
-	// render state
-	renderTodos(todos)
+	return todos;
+	
 }
 
 function deleteTodo(todos, todoId) {
@@ -38,9 +37,7 @@ function deleteTodo(todos, todoId) {
 	}
 
 	console.dir(todos);
-	// render state
-	renderTodos(todos)
-
+	
 }
 
 function refreshTodo(todos, todoId){
@@ -61,17 +58,22 @@ function refreshTodo(todos, todoId){
 
 }
 
+function totalNumberTodos() { 
+	return nodes.divCounter.innerHTML = `Total number of TODOs: ${todos.length}`;
+}
+
 const nodes = {
 	output:document.querySelector('.output'),
 	input:document.querySelector('input'),
 	btnAdd:document.querySelector('button'),
-	ul:document.querySelector('ul')
+	ul:document.querySelector('ul'),
+	divCounter:document.getElementById('counter'),
 }
 
 // State
 let todos = [];
 // fetch todos
-const url="http://localhost:9999/todos";
+const url="http://localhost:3000/todos";
 
 fetch(url)
 .then(r=>r.json())
@@ -84,6 +86,9 @@ fetch(url)
 nodes.btnAdd.addEventListener('click', function(e){
 	// prevent default action on submit button click
 	e.preventDefault();
+	todos = addTodo(todos);
+	renderTodos(todos)
+
 })
 
 nodes.ul.addEventListener('click', function (e) {

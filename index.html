@@ -5,32 +5,18 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>index </title>
 	<style type="text/css">
-        
-       		html,body{
-            margin:0;
-            padding: 0;
-			}  
-        #page {
-            font-size: 20px;
-            border: 1em outset #B0893B;
+     #page {
+		font-family: "Poppins";
+            font-size: 27px;
+            border: 1em outset rgba(205, 139, 87, 55);
             font-weight: 900;
             color: #1E1616;
 
-            
-            background-image: url("./todoAppBackgroundImg.jpg");
-
-            background-color: rgba(205, 139, 87, 55);
-
-            /* background-size: 100% 100%; */
-
-           
-            /* background-size: cover; */
-
-           /* background: #B17D14 url("assets/raven-1002849_1920.jpg") bottom/100% 100%; */
-        }
+            }
+</style>
 </head>
 
-<body>
+<body id="page">
 	<form action='#'>
 		<label><input type="text" placeholder="add new todo" autofocus></label>
 		<button id="buttonAdd">Add</button>
@@ -42,7 +28,7 @@
 	</div>
 	<div id="counter">Total number of TODOs: </div>
 
-
 	<script src=".\main.js"></script>
+
 </body>
 </html>
