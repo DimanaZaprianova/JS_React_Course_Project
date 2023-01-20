@@ -4,31 +4,21 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>index </title>
-	<style type="text/css">
-     #page {
-		font-family: "Poppins";
-            font-size: 27px;
-            border: 1em outset rgba(205, 139, 87, 55);
-            font-weight: 900;
-            color: #1E1616;
-
-            }
-</style>
+	<link href="styles.css" rel="stylesheet" type="text/css">
 </head>
 
-<body id="page">
-	<form action='#'>
-		<label><input type="text" placeholder="add new todo" autofocus></label>
-		<button id="buttonAdd">Add</button>
+<body>
+	<form action="#" class="inputSection">
+		<label><input type="text" autofocus class="inputToDo" placeholder="add new todo"></label>
+		<button class="buttonAdd">Add</button>
 	</form>
 	<div class="output">
-		<ul style = 'list-style: none' >
+		<ul>
 
 		</ul>
 	</div>
-	<div id="counter">Total number of TODOs: </div>
+	<div class="counterLine" id="counter">Total number of TODOs: </div>
 
 	<script src=".\main.js"></script>
-
 </body>
 </html>
